@@ -26,13 +26,12 @@
         create-venv = ''
           python -m venv $VENV_DIR
           source $VENV_DIR/bin/activate
+          pip install uv
+          pip install --upgrade pip
+          pip install "flet[all]" --upgrade
           if [ ! -f pyproject.toml ]; then
-            pip install uv
             uv init
-            uv add install --upgrade pip
-            uv add install "flet[all]" --upgrade
             uv run flet create app
-            # Mover archivos de la carpeta app a la raíz, asegurándose de que la carpeta de destino esté vacía
             if [ -d app ]; then
               rm -rf src  # Eliminar la carpeta src si existe
               mv -f app/* .
@@ -51,8 +50,8 @@
             python -m venv $VENV_DIR
           fi
           source $VENV_DIR/bin/activate
-          uv add install --upgrade pip
-          uv add install "flet[all]" --upgrade
+          pip install --upgrade pip
+          pip install "flet[all]" --upgrade
         '';
         default.openFiles = [ "$MAIN_FILE" ];
       };
