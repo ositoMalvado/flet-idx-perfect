@@ -26,9 +26,9 @@
         create-venv = ''
           python -m venv $VENV_DIR
           source $VENV_DIR/bin/activate
-          pip install --upgrade pip
-          pip install "flet[all]" --upgrade
-          pip install uv
+          uv pip install --upgrade pip  # Actualizar pip usando uv
+          uv pip install "flet[all]" --upgrade
+          uv pip install uv  # Instalar uv en el entorno virtual
           
           # Verificar si el proyecto ya está inicializado
           if [ ! -f pyproject.toml ]; then
@@ -53,8 +53,8 @@
             python -m venv $VENV_DIR
           fi
           source $VENV_DIR/bin/activate
-          pip install --upgrade pip
-          pip install "flet[all]" --upgrade
+          uv pip install --upgrade pip  # Actualizar pip usando uv
+          uv pip install "flet[all]" --upgrade
         '';
         default.openFiles = [ "README.md" "requirements.txt" "$MAIN_FILE" ];
       };
