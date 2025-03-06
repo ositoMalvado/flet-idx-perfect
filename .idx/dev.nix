@@ -26,9 +26,9 @@
         create-venv = ''
           python -m venv $VENV_DIR
           source $VENV_DIR/bin/activate
-          uv pip install --upgrade pip  # Actualizar pip usando uv
-          uv pip install "flet[all]" --upgrade
-          uv pip install uv  # Instalar uv en el entorno virtual
+          pip install uv
+          uv add --upgrade pip
+          uv add "flet[all]" --upgrade
           
           # Verificar si el proyecto ya está inicializado
           if [ ! -f pyproject.toml ]; then
@@ -53,8 +53,8 @@
             python -m venv $VENV_DIR
           fi
           source $VENV_DIR/bin/activate
-          uv pip install --upgrade pip  # Actualizar pip usando uv
-          uv pip install "flet[all]" --upgrade
+          uv add --upgrade pip
+          uv add "flet[all]" --upgrade
         '';
         default.openFiles = [ "pyproject.toml" "$MAIN_FILE" ];
       };
@@ -69,7 +69,7 @@
             "-c"
             ''
             source $VENV_DIR/bin/activate
-            uv run flet run $MAIN_FILE --web --port $PORT -d -r
+            flet run $MAIN_FILE --web --port $PORT -d -r
             ''
           ];
           env = { PORT = "$PORT"; };
