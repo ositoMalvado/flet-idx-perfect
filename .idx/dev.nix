@@ -12,7 +12,7 @@
 
   env = {
     VENV_DIR = ".venv";
-    MAIN_FILE = "main.py";  # Asegúrate de que esto coincida con la ubicación correcta
+    MAIN_FILE = "src/main.py";  # Asegúrate de que esto coincida con la ubicación correcta
   };
 
   idx = {
@@ -56,7 +56,7 @@
           uv pip install --upgrade pip  # Actualizar pip usando uv
           uv pip install "flet[all]" --upgrade
         '';
-        default.openFiles = [ "README.md" "requirements.txt" "$MAIN_FILE" ];
+        default.openFiles = [ "pyproject.toml" "$MAIN_FILE" ];
       };
     };
 
@@ -69,7 +69,7 @@
             "-c"
             ''
             source $VENV_DIR/bin/activate
-            flet run $MAIN_FILE --web --port $PORT -d -r
+            uv run flet run $MAIN_FILE --web --port $PORT -d -r
             ''
           ];
           env = { PORT = "$PORT"; };
