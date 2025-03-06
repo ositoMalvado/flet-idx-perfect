@@ -12,7 +12,7 @@
 
   env = {
     VENV_DIR = ".venv";
-    MAIN_FILE = "src/main.py";  # Asegúrate de que esto coincida con la ubicación correcta
+    MAIN_FILE = "main.py";  # Asegúrate de que esto coincida con la ubicación correcta
   };
 
   idx = {
@@ -26,9 +26,9 @@
         create-venv = ''
           python -m venv $VENV_DIR
           source $VENV_DIR/bin/activate
+          pip install --upgrade pip
+          pip install "flet[all]" --upgrade
           pip install uv
-          uv add --upgrade pip
-          uv add "flet[all]" --upgrade
           
           # Verificar si el proyecto ya está inicializado
           if [ ! -f pyproject.toml ]; then
@@ -53,10 +53,10 @@
             python -m venv $VENV_DIR
           fi
           source $VENV_DIR/bin/activate
-          uv add --upgrade pip
-          uv add "flet[all]" --upgrade
+          pip install --upgrade pip
+          pip install "flet[all]" --upgrade
         '';
-        default.openFiles = [ "pyproject.toml" "$MAIN_FILE" ];
+        default.openFiles = [ "README.md" "requirements.txt" "$MAIN_FILE" ];
       };
     };
 
