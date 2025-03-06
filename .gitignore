@@ -1,0 +1,4 @@
+.idx/
+.venv/
+storage/
+__pycache__/
