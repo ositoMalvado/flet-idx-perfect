@@ -12,7 +12,7 @@
 
   env = {
     VENV_DIR = ".venv";
-    MAIN_FILE = "main.py";  # Actualizado para reflejar la ubicación correcta
+    MAIN_FILE = "main.py";  # Asegúrate de que esto coincida con la ubicación correcta
   };
 
   idx = {
@@ -26,12 +26,22 @@
         create-venv = ''
           python -m venv $VENV_DIR
           source $VENV_DIR/bin/activate
+          pip install --upgrade pip
           pip install "flet[all]" --upgrade
           pip install uv
-          uv init
-          uv run flet create app
-          mv -f app/* .
-          rm -rf app
+          
+          # Verificar si el proyecto ya está inicializado
+          if [ ! -f pyproject.toml ]; then
+            uv init
+            uv run flet create app
+            # Mover archivos de la carpeta app a la raíz, asegurándose de que la carpeta de destino esté vacía
+            if [ -d app ]; then
+              rm -rf src  # Eliminar la carpeta src si existe
+              mv -f app/* .
+              rm -rf app
+              rm -f .gitattributes .python-version main.py README.md uv.lock
+            fi
+          fi
         '';
         default.openFiles = [ "pyproject.toml" "$MAIN_FILE" ];
       };
@@ -43,6 +53,7 @@
             python -m venv $VENV_DIR
           fi
           source $VENV_DIR/bin/activate
+          pip install --upgrade pip
           pip install "flet[all]" --upgrade
         '';
         default.openFiles = [ "README.md" "requirements.txt" "$MAIN_FILE" ];
