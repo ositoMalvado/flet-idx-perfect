@@ -19,6 +19,9 @@
     extensions = [
       "ms-python.python"
       "ms-python.debugpy"
+      "charliermarsh.ruff"
+      "sobytes.flet-control-wrap"
+      "python.vscode-pylance"
     ];
 
     workspace = {
@@ -28,9 +31,9 @@
           source $VENV_DIR/bin/activate
           pip install uv
           pip install --upgrade pip
-          pip install "flet[all]" --upgrade
           if [ ! -f pyproject.toml ]; then
             uv init
+            uv add "flet[all]" --upgrade
             uv run flet create app
             if [ -d app ]; then
               rm -rf src  # Eliminar la carpeta src si existe
@@ -46,7 +49,6 @@
       onStart = {
         check-venv-existence = ''
           if [ ! -d $VENV_DIR ]; then
-            echo "Creando entorno virtual..."
             python -m venv $VENV_DIR
           fi
           source $VENV_DIR/bin/activate
@@ -76,3 +78,4 @@
     };
   };
 }
+
