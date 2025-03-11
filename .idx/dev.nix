@@ -8,6 +8,7 @@
     pkgs.wirelesstools
     pkgs.zrok
     pkgs.aria2
+    pkgs.sudo
   ];
 
   env = {
