@@ -34,13 +34,8 @@
           if [ ! -f pyproject.toml ]; then
             uv init
             uv add "flet[all]" --upgrade
-            uv run flet create app
-            if [ -d app ]; then
-              rm -rf src  # Eliminar la carpeta src si existe
-              mv -f app/* .
-              rm -rf app
-              rm -f .gitattributes .python-version main.py README.md uv.lock
-            fi
+            uv run flet create
+            rm -f .gitattributes .python-version main.py README.md uv.lock
           fi
         '';
         default.openFiles = [ "pyproject.toml" "$MAIN_FILE" ];
