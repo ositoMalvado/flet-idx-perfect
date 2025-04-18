@@ -10,7 +10,7 @@
   ];
   env = {
     VENV_DIR = ".venv";
-    MAIN_FILE = "src/main.py";
+    MAIN_FILE = "examples/flet_extension_example/src/main.py";
   };
   idx = {
     extensions = [
