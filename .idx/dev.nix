@@ -29,7 +29,7 @@
             if [ ! -f pyproject.toml ]; then
               uv init
               uv add "flet[all]" --upgrade
-              uv run flet create
+              uv run flet create --template extension --project-name flet-extension
               rm -f .gitattributes .python-version main.py README.md uv.lock
             fi
           fi
@@ -42,7 +42,8 @@
             python -m venv $VENV_DIR
             source $VENV_DIR/bin/activate
             pip install --upgrade pip
-            pip install "flet[all]" --upgrade
+            pip install uv
+            uv pip install "flet[all]" --upgrade
           else
             source $VENV_DIR/bin/activate
           fi
