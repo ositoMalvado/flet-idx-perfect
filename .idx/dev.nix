@@ -10,7 +10,7 @@
   ];
   env = {
     VENV_DIR = ".venv";
-    MAIN_FILE = "examples/flet_extension_example/src/main.py";
+    MAIN_FILE = "src/main.py";
   };
   idx = {
     extensions = [
@@ -29,7 +29,7 @@
             if [ ! -f pyproject.toml ]; then
               uv init
               uv add "flet[all]" --upgrade
-              uv run flet create --template extension --project-name flet-extension
+              uv run flet create
               rm -f .gitattributes .python-version main.py README.md uv.lock
             fi
           fi
@@ -42,8 +42,7 @@
             python -m venv $VENV_DIR
             source $VENV_DIR/bin/activate
             pip install --upgrade pip
-            pip install uv
-            uv pip install "flet[all]" --upgrade
+            pip install "flet[all]" --upgrade
           else
             source $VENV_DIR/bin/activate
           fi
